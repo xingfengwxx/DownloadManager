@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -20,11 +22,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -33,4 +46,43 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //Utils，常用工具包合集
+    implementation 'com.blankj:utilcodex:1.23.7'
+
+    //Walle，美团多渠道打包
+    implementation "com.meituan.android.walle:library:$rootProject.walle_version"
+
+    //AutoSize，屏幕适配
+    implementation 'me.jessyan:autosize:1.1.2'
+
+    //okHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.okio:okio:2.2.2'
+
+    //RxJava and RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+
+    //Retrofit适配RxJava
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+
+    //okGo,下载引擎
+    implementation 'com.lzy.net:okgo:3.0.4'
+    implementation 'com.lzy.net:okrx2:2.0.2'
+    implementation 'com.lzy.net:okserver:2.0.5'
+
+    //Stetho，Facebook出品的调试工具
+    implementation "com.facebook.stetho:stetho:$rootProject.stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho_version"
+
+    //ARouter,阿里路由导航框架
+    implementation 'com.alibaba:arouter-api:1.4.0'
+    kapt 'com.alibaba:arouter-compiler:1.2.1'
+
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }
