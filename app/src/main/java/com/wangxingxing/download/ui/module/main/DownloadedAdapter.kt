@@ -22,5 +22,7 @@ class DownloadedAdapter(list: List<DownloadTask>) : BaseQuickAdapter<DownloadTas
             FormatUtils.TYPE_VIDEO  -> imageView.setImageResource(R.drawable.ic_format_video)
             FormatUtils.TYPE_OTHERS -> imageView.setImageResource(R.drawable.ic_format_others)
         }
+
+        helper.addOnClickListener(R.id.ivDelete)
     }
 }

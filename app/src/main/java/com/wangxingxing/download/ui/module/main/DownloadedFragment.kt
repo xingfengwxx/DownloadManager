@@ -43,6 +43,12 @@ class DownloadedFragment : Fragment() {
         recyclerView.adapter = mAdapter
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
+            //TODO(根据文件类型打开)
+        }
+
+        mAdapter.setOnItemChildClickListener { adapter, view, position ->
+            mData[position].remove(true)
+            mData.removeAt(position)
             mAdapter.notifyDataSetChanged()
         }
     }
