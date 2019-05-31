@@ -85,4 +85,15 @@ dependencies {
 
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glide_version"
+
+    //RecyclerViewHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
+
+    //NumberProgressBar
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 }

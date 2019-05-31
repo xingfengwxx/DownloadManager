@@ -15,10 +15,12 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.gson.Gson
 import com.wangxingxing.download.R
 import com.wangxingxing.download.RouterManager
+import kotlinx.android.synthetic.main.content_main.*
 
 @Route(path = RouterManager.URL_MAIN)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private val titles = arrayOf("已下载", "正在下载")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        setupViewPager()
     }
 
     override fun onBackPressed() {
@@ -94,5 +98,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun setupViewPager() {
+        val adapter = PageAdapter(supportFragmentManager)
+        adapter.addFragment(DownloadedFragment.newInstance(), titles[0])
+        adapter.addFragment(DownloadingPlusFragment.newInstance(), titles[1])
+
+        viewPager.adapter = adapter
+        tabLayout.setupWithViewPager(viewPager)
+        viewPager.offscreenPageLimit = 2
+        viewPager.currentItem = 0
     }
 }
