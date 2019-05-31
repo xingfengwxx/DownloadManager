@@ -6,11 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.SizeUtils
 import com.lzy.okserver.OkDownload
 import com.lzy.okserver.task.XExecutor
 import com.wangxingxing.download.R
+import com.wangxingxing.download.event.UpdateListEvent
+import com.wangxingxing.download.ui.widget.SpacesItemDecoration
 import kotlinx.android.synthetic.main.fragment_downloading_plus.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class DownloadingPlusFragment : Fragment(), XExecutor.OnAllTaskEndListener {
@@ -36,6 +44,7 @@ class DownloadingPlusFragment : Fragment(), XExecutor.OnAllTaskEndListener {
         mAdapter = DownloadingAdapter(context!!)
         mAdapter.updateData(DownloadingAdapter.TYPE_ING)
         rvDownloading.layoutManager = LinearLayoutManager(context)
+        rvDownloading.addItemDecoration(SpacesItemDecoration(SizeUtils.dp2px(8f)))
         rvDownloading.adapter = mAdapter
     }
 
@@ -51,6 +60,21 @@ class DownloadingPlusFragment : Fragment(), XExecutor.OnAllTaskEndListener {
     override fun onResume() {
         super.onResume()
         mAdapter.notifyDataSetChanged()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun onUpdate(event: UpdateListEvent) {
+        mAdapter.updateData(DownloadingAdapter.TYPE_ING)
     }
 
     companion object {

@@ -16,6 +16,8 @@ import com.lzy.okserver.OkDownload
 import com.lzy.okserver.download.DownloadListener
 import com.lzy.okserver.download.DownloadTask
 import com.wangxingxing.download.R
+import com.wangxingxing.download.event.UpdateListEvent
+import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.text.NumberFormat
 
@@ -130,6 +132,7 @@ class DownloadingAdapter(context: Context) : RecyclerView.Adapter<DownloadingAda
             }
             pbProgress.max = 10000
             pbProgress.progress = (progress.fraction * 10000).toInt()
+            LogUtils.d("filename=${progress.fileName}, progress=${pbProgress.progress}")
         }
 
         fun start() {
@@ -160,7 +163,10 @@ class DownloadingAdapter(context: Context) : RecyclerView.Adapter<DownloadingAda
     private inner class ListDownloadListener internal constructor(tag: Any, private val holder: ViewHolder) :
         DownloadListener(tag) {
 
-        override fun onStart(progress: Progress) {}
+        override fun onStart(progress: Progress) {
+            LogUtils.d("progress=$progress")
+            updateData(type)
+        }
 
         override fun onProgress(progress: Progress) {
             if (tag === holder.getTag()) {
@@ -171,13 +177,18 @@ class DownloadingAdapter(context: Context) : RecyclerView.Adapter<DownloadingAda
         override fun onError(progress: Progress) {
             val throwable = progress.exception
             throwable?.printStackTrace()
+            LogUtils.e(progress.exception)
         }
 
         override fun onFinish(file: File, progress: Progress) {
-            LogUtils.i("onFinish: 下载完成：path=" + progress.filePath)
+            LogUtils.d("filename=${file.name}, path=${file.absolutePath}")
+            EventBus.getDefault().post(UpdateListEvent())
             updateData(type)
         }
 
-        override fun onRemove(progress: Progress) {}
+        override fun onRemove(progress: Progress) {
+            LogUtils.d("tag=$tag")
+            updateData(type)
+        }
     }
 }
