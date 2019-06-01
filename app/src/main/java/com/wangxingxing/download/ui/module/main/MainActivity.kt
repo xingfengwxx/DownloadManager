@@ -58,8 +58,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
 //            DownloadUtils.download(testUrls[Random.nextInt(6)])
             openUrlDialog()
         }
@@ -122,7 +120,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_send -> {
-
+                RouterManager.goAbout()
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
