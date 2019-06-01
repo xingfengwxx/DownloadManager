@@ -1,5 +1,6 @@
 package com.wangxingxing.download.ui.module.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
@@ -19,6 +20,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.Gson
 import com.wangxingxing.download.BaseApplication
+import com.wangxingxing.download.Constants
 import com.wangxingxing.download.R
 import com.wangxingxing.download.RouterManager
 import com.wangxingxing.download.utils.DownloadUtils
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_share -> {
-
+                shareApp()
             }
             R.id.nav_send -> {
                 RouterManager.goAbout()
@@ -162,5 +164,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             positiveButton(R.string.ok)
             negativeButton(R.string.cancel)
         }
+    }
+
+    private fun shareApp() {
+        var content = String.format(getString(R.string.txt_share_content), getString(R.string.app_name), Constants.GOOGLE_PLAY_URL)
+        val textIntent = Intent(Intent.ACTION_SEND)
+        textIntent.type = "text/plain"
+        textIntent.putExtra(Intent.EXTRA_TEXT, content)
+        startActivity(Intent.createChooser(textIntent, "歌曲分享"))
     }
 }

@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.wangxingxing.download.BuildConfig
+import com.wangxingxing.download.Constants
 import com.wangxingxing.download.R
 import com.wangxingxing.download.RouterManager
 import kotlinx.android.synthetic.main.activity_about.*
@@ -61,7 +62,7 @@ class AboutActivity : AppCompatActivity() {
             } else {
                 //没有google play, 用浏览器访问
                 val intentBrowser = Intent(Intent.ACTION_VIEW)
-                intentBrowser.data = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                intentBrowser.data = Uri.parse(Constants.GOOGLE_PLAY_URL)
                 if (IntentUtils.isIntentAvailable(intentBrowser)) {
                     startActivity(intentBrowser)
                 } else {

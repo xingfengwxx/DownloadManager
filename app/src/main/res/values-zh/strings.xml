@@ -28,6 +28,8 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="app_grade">应用评分</string>
+    <string name="txt_share_content">我正在使用 【%s】，我觉得很不错，推荐给你，链接：%s</string>
+    <string name="app_share">应用分享</string>
 
     <string name="toast_url_error">请输入正确的网址</string>
     <string name="toast_open_app_error">打开应用失败</string>

@@ -16,4 +16,7 @@ object Constants {
     val PATH_APK = PATH_APP_ROOT + "apk" + File.separator
     //log
     val PATH_LOG = PATH_APP_ROOT + "log" + File.separator
+
+    //txt
+    val GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=${BaseApplication.instance.packageName}"
 }

@@ -27,6 +27,8 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="app_grade">App Grade</string>
+    <string name="txt_share_content">I am using 【%s】, I think it is very good, recommend to you, link: %s</string>
+    <string name="app_share">App Share</string>
 
     <string name="toast_url_error">Please enter the correct url</string>
     <string name="toast_open_app_error">Open application failed</string>
