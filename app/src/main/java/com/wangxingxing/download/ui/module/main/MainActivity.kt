@@ -23,8 +23,13 @@ import com.wangxingxing.download.BaseApplication
 import com.wangxingxing.download.Constants
 import com.wangxingxing.download.R
 import com.wangxingxing.download.RouterManager
+import com.wangxingxing.download.db.Note
+import com.wangxingxing.download.db.ObjectBox
 import com.wangxingxing.download.utils.DownloadUtils
+import io.objectbox.Box
+import io.objectbox.kotlin.boxFor
 import kotlinx.android.synthetic.main.content_main.*
+import java.util.*
 import kotlin.random.Random
 
 @Route(path = RouterManager.URL_MAIN)
@@ -51,6 +56,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         "https://a4035eacbeadddcf369c81b2d63e684d.dd.cdntips.com/imtt.dd.qq.com/16891/461FE40B65C07681776B618EC6D73B07.apk?mkey=5cf0ba6d7151e2a8&f=1806&fsname=com.tencent.tmgp.pubgmhd_1.1.16_8000.apk&csr=1bbd&cip=113.81.196.93&proto=https",
         "https://bf45a1d0861cf7963d7797cd2532fd4c.dd.cdntips.com/imtt.dd.qq.com/16891/A648B2CCD07D1444DEB8A1F629B4F18F.apk?mkey=5cf0ba207151e2a8&f=0c2f&fsname=com.taobao.taobao_8.8.0_243.apk&csr=1bbd&cip=113.81.196.93&proto=https"
     )
+
+    private lateinit var notesBox: Box<Note>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,7 +123,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_tools -> {
-
+                initNotes()
             }
             R.id.nav_share -> {
                 shareApp()
@@ -171,6 +178,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val textIntent = Intent(Intent.ACTION_SEND)
         textIntent.type = "text/plain"
         textIntent.putExtra(Intent.EXTRA_TEXT, content)
-        startActivity(Intent.createChooser(textIntent, "歌曲分享"))
+        startActivity(Intent.createChooser(textIntent, getString(R.string.app_share)))
+    }
+
+    private fun initNotes() {
+       notesBox = ObjectBox.boxStore.boxFor()
+        val notes = mutableListOf<Note>()
+        for (i in 0..10) {
+            val note = Note()
+            note.text = "txt$i"
+            note.comment = "comment$i"
+            note.date = Date()
+            notes.add(note)
+        }
+        notesBox.put(notes)
     }
 }

@@ -14,6 +14,7 @@ import com.lzy.okgo.cookie.store.DBCookieStore
 import com.lzy.okgo.https.HttpsUtils
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor
 import com.lzy.okserver.OkDownload
+import com.wangxingxing.download.db.ObjectBox
 import okhttp3.OkHttpClient
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
@@ -35,15 +36,16 @@ class BaseApplication : Application() {
         instance = this
         Utils.init(this)
         initLog()
-        initStetho()
         initOkGo()
         initARouter()
+        initMainProcess()
     }
 
-    private fun initStetho() {
+    private fun initMainProcess() {
         if (ProcessUtils.isMainProcess()) {
             //只在主进程初始化
             Stetho.initializeWithDefaults(this)
+            ObjectBox.init(this)
         }
     }
 
