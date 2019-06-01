@@ -72,7 +72,7 @@ class BaseApplication : Application() {
                 }
             })
         LogUtils.i(config.toString())
-        LogUtils.e(ProcessUtils.getCurrentProcessName())
+        LogUtils.i(ProcessUtils.getCurrentProcessName())
     }
 
     private fun initARouter() {

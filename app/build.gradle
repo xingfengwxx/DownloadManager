@@ -96,4 +96,9 @@ dependencies {
 
     //NumberProgressBar
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+
+    //dialog
+    implementation "com.afollestad.material-dialogs:core:$rootProject.material_dialogs_version"
+    implementation "com.afollestad.material-dialogs:input:$rootProject.material_dialogs_version"
+    implementation "com.afollestad.material-dialogs:bottomsheets:$rootProject.material_dialogs_version"
 }

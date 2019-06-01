@@ -19,4 +19,11 @@
 
     <string name="tab_title_completed">Completed</string>
     <string name="tab_title_downloading">Downloading</string>
+
+    <string name="dialog_title_input_url">Please enter the URL to download the file</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="toast_url_error">Please enter the correct url</string>
 </resources>

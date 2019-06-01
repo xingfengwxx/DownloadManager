@@ -1,6 +1,8 @@
 package com.wangxingxing.download.ui.module.main
 
 import android.os.Bundle
+import android.text.InputType
+import android.text.TextUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
@@ -11,7 +13,10 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.Gson
 import com.wangxingxing.download.BaseApplication
 import com.wangxingxing.download.R
@@ -55,7 +60,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            DownloadUtils.download(testUrls[Random.nextInt(6)])
+//            DownloadUtils.download(testUrls[Random.nextInt(6)])
+            openUrlDialog()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -133,5 +139,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         tabLayout.setupWithViewPager(viewPager)
         viewPager.offscreenPageLimit = 2
         viewPager.currentItem = 0
+    }
+
+    private fun openUrlDialog() {
+        MaterialDialog(this).show {
+            title(R.string.dialog_title_input_url)
+            input(
+                hint = "url",
+                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+            ) { _, text ->
+                if (TextUtils.isEmpty(text))
+                    return@input
+                val regex = Regex("[a-zA-z]+://[^\\s]*")
+                if (regex.matches(text)) {
+                    if (text.startsWith("http") || text.startsWith("https")) {
+                        DownloadUtils.download(text.toString())
+                    } else {
+                        ToastUtils.showShort(getString(R.string.toast_url_error))
+                    }
+                } else {
+                    ToastUtils.showShort(getString(R.string.toast_url_error))
+                }
+            }
+            positiveButton(R.string.ok)
+            negativeButton(R.string.cancel)
+        }
     }
 }
