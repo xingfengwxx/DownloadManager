@@ -15,12 +15,9 @@ object DownloadUtils {
     const val TAG = "DownloadUtils"
 
     fun download(url: String) {
-        val fileName = "test-" + System.currentTimeMillis() + ".apk"
-
         val request = OkGo.get<File>(url)
         OkDownload.request(url, request)
             .folder(Constants.PATH_DOWNLOAD)
-            .fileName(fileName)
             .save()
             .register(object: DownloadListener(TAG) {
                 override fun onFinish(t: File?, progress: Progress?) {

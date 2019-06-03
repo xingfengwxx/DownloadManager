@@ -132,6 +132,7 @@ class DownloadingAdapter(context: Context) : RecyclerView.Adapter<DownloadingAda
             }
             pbProgress.max = 10000
             pbProgress.progress = (progress.fraction * 10000).toInt()
+            name.text = progress.fileName
             LogUtils.d("filename=${progress.fileName}, progress=${pbProgress.progress}")
         }
 
