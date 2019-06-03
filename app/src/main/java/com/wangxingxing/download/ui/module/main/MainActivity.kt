@@ -15,10 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onCancel
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.afollestad.materialdialogs.input.input
+import com.airbnb.lottie.utils.Logger
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.Gson
+import com.lzy.okserver.OkDownload
 import com.wangxingxing.download.BaseApplication
 import com.wangxingxing.download.Constants
 import com.wangxingxing.download.R
@@ -58,6 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     )
 
     private lateinit var notesBox: Box<Note>
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +71,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fab = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
 //            DownloadUtils.download(testUrls[Random.nextInt(6)])
             openUrlDialog()
+            fab.setImageResource(R.drawable.ic_close)
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -105,7 +112,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_pause -> {
+                OkDownload.getInstance().pauseAll()
+                return true
+            }
+            R.id.action_start -> {
+                OkDownload.getInstance().startAll()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -170,6 +184,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             positiveButton(R.string.ok)
             negativeButton(R.string.cancel)
+            onDismiss {
+                LogUtils.i("onDismiss")
+                fab.setImageResource(R.drawable.ic_add_24dp)
+            }
         }
     }
 
