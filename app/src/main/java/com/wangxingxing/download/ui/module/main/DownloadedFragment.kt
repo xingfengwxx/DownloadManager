@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.lzy.okgo.db.DownloadManager
 import com.lzy.okserver.OkDownload
 import com.lzy.okserver.download.DownloadTask
 import com.wangxingxing.download.R
+import com.wangxingxing.download.RouterManager
 import com.wangxingxing.download.event.UpdateListEvent
 import com.wangxingxing.download.ui.widget.SpacesItemDecoration
+import com.wangxingxing.download.utils.FormatUtils
 import kotlinx.android.synthetic.main.fragment_downloaded.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -43,7 +46,7 @@ class DownloadedFragment : Fragment() {
         recyclerView.adapter = mAdapter
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
-            //TODO(根据文件类型打开)
+            openFile(mData[position].progress.fileName, mData[position].progress.filePath)
         }
 
         mAdapter.setOnItemChildClickListener { adapter, view, position ->
@@ -72,6 +75,14 @@ class DownloadedFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdate(event: UpdateListEvent) {
         showDownloadedList()
+    }
+
+    private fun openFile(filename: String, filepath: String) {
+        when (FormatUtils.getFormatType(filename)) {
+            FormatUtils.TYPE_APK    -> AppUtils.installApp(filepath)
+            FormatUtils.TYPE_MUSIC,
+            FormatUtils.TYPE_VIDEO  -> RouterManager.goVideoPlayer(filepath, filename)
+        }
     }
 
     companion object {

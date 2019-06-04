@@ -8,6 +8,7 @@ class RouterManager {
         const val URL_SPLASH = "/splash/splash"
         const val URL_ABOUT = "/about/about"
         const val URL_SETTINGS = "/settings/settings"
+        const val URL_VIDEO_PLAYER = "/video/videoPlayer"
 
         fun goSplash() {
             ARouter.getInstance().build(URL_SPLASH).navigation()
@@ -23,6 +24,13 @@ class RouterManager {
 
         fun goSettings() {
             ARouter.getInstance().build(URL_SETTINGS).navigation()
+        }
+
+        fun goVideoPlayer(url: String, title: String) {
+            ARouter.getInstance().build(URL_VIDEO_PLAYER)
+                .withString("mUrl", url)
+                .withString("mTitle", title)
+                .navigation()
         }
     }
 }

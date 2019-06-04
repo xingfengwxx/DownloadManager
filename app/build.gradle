@@ -110,6 +110,9 @@ dependencies {
 
     //Lottie
     implementation 'com.airbnb.android:lottie:3.0.5'
+
+    //GSYVideo
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
 }
 
 // apply the plugin after the dependencies block
