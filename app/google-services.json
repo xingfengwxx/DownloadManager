@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "780337562631",
+    "firebase_url": "https://videodownloadmanager-697e1.firebaseio.com",
+    "project_id": "videodownloadmanager-697e1",
+    "storage_bucket": "videodownloadmanager-697e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780337562631:android:cc3f21266405030b",
+        "android_client_info": {
+          "package_name": "com.wangxingxing.download"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780337562631-pr6kab757b0imasnv9t8h4eee14m39p6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi4wW8YNsi_tOToTVfKGhN_ZZnhnOnxgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780337562631-pr6kab757b0imasnv9t8h4eee14m39p6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

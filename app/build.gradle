@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.fabric'
+
 
 android {
     compileSdkVersion 28
@@ -113,7 +115,16 @@ dependencies {
 
     //GSYVideo
     implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+
+    //Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
 
 // apply the plugin after the dependencies block
 apply plugin: 'io.objectbox'
+
+// Add to the bottom of the file
+apply plugin: 'com.google.gms.google-services'
