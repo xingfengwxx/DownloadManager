@@ -36,4 +36,7 @@
 
     <string name="toast_url_error">请输入正确的网址</string>
     <string name="toast_open_app_error">打开应用失败</string>
+
+    <string name="settings_title_save_path">保存路径</string>
+    <string name="settings_summary_save_path">/storage/emulated/0/VideoDownloadManager/</string>
 </resources>

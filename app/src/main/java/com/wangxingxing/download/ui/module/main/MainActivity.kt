@@ -134,10 +134,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_slideshow -> {
-
+                initNotes()
             }
             R.id.nav_tools -> {
-                initNotes()
+                RouterManager.goSettings()
             }
             R.id.nav_share -> {
                 shareApp()
@@ -185,7 +185,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             positiveButton(R.string.ok)
             negativeButton(R.string.cancel)
             onDismiss {
-                LogUtils.i("onDismiss")
                 fab.setImageResource(R.drawable.ic_add_24dp)
             }
         }

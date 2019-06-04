@@ -35,4 +35,8 @@
 
     <string name="toast_url_error">Please enter the correct url</string>
     <string name="toast_open_app_error">Open application failed</string>
+
+    <string name="settings_title_save_path">Save Path</string>
+    <string name="settings_summary_save_path">/storage/emulated/0/VideoDownloadManager/</string>
+
 </resources>

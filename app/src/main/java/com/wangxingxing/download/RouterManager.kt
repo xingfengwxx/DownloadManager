@@ -7,6 +7,7 @@ class RouterManager {
         const val URL_MAIN = "/main/main"
         const val URL_SPLASH = "/splash/splash"
         const val URL_ABOUT = "/about/about"
+        const val URL_SETTINGS = "/settings/settings"
 
         fun goSplash() {
             ARouter.getInstance().build(URL_SPLASH).navigation()
@@ -18,6 +19,10 @@ class RouterManager {
 
         fun goAbout() {
             ARouter.getInstance().build(URL_ABOUT).navigation()
+        }
+
+        fun goSettings() {
+            ARouter.getInstance().build(URL_SETTINGS).navigation()
         }
     }
 }
