@@ -24,12 +24,19 @@ object FormatUtils {
     const val FORMAT_RMVB = "rmvb"
     const val FORMAT_MOV = "mov"
     const val FORMAT_MOD = "mod"
+    //压缩文件
+    const val FORMAT_RAR = "rar"
+    const val FORMAT_ZIP = "zip"
+    const val FORMAT_7Z = "7z"
+    const val FORMAT_TAR = "tar"
+    const val FORMAT_GZ = "gz"
 
 
     //文件类型=======================
     const val TYPE_APK = 0
     const val TYPE_MUSIC = 1
     const val TYPE_VIDEO = 2
+    const val TYPE_ZIP = 3
     const val TYPE_OTHERS = 10
 
     fun getFormatType(fileName: String): Int {
@@ -47,7 +54,7 @@ object FormatUtils {
                 FORMAT_FLAC,
                 FORMAT_APE,
                 FORMAT_ALAC,
-                FORMAT_WV  -> return TYPE_MUSIC
+                FORMAT_WV -> return TYPE_MUSIC
 
                 FORMAT_MP4,
                 FORMAT_3GP,
@@ -59,6 +66,12 @@ object FormatUtils {
                 FORMAT_RMVB,
                 FORMAT_MOV,
                 FORMAT_MOD -> return TYPE_VIDEO
+
+                FORMAT_RAR,
+                FORMAT_ZIP,
+                FORMAT_7Z,
+                FORMAT_TAR,
+                FORMAT_GZ -> return TYPE_ZIP
 
                 else -> return TYPE_OTHERS
             }

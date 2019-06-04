@@ -20,6 +20,7 @@ class DownloadedAdapter(list: List<DownloadTask>) : BaseQuickAdapter<DownloadTas
             FormatUtils.TYPE_APK    -> imageView.setImageResource(R.drawable.ic_format_apk)
             FormatUtils.TYPE_MUSIC  -> imageView.setImageResource(R.drawable.ic_format_music)
             FormatUtils.TYPE_VIDEO  -> imageView.setImageResource(R.drawable.ic_format_video)
+            FormatUtils.TYPE_ZIP    -> imageView.setImageResource(R.drawable.ic_format_zip)
             FormatUtils.TYPE_OTHERS -> imageView.setImageResource(R.drawable.ic_format_others)
         }
 
