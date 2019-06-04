@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.Utils
 import com.facebook.stetho.Stetho
+import com.google.android.gms.ads.MobileAds
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheEntity
 import com.lzy.okgo.cache.CacheMode
@@ -39,6 +40,7 @@ class BaseApplication : Application() {
         initOkGo()
         initARouter()
         initMainProcess()
+        MobileAds.initialize(this, getString(R.string.admob_app_id))
     }
 
     private fun initMainProcess() {

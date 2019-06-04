@@ -4,25 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.callbacks.onCancel
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.afollestad.materialdialogs.input.input
-import com.airbnb.lottie.utils.Logger
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.google.gson.Gson
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.lzy.okserver.OkDownload
 import com.wangxingxing.download.BaseApplication
 import com.wangxingxing.download.Constants
@@ -35,7 +32,6 @@ import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
-import kotlin.random.Random
 
 @Route(path = RouterManager.URL_MAIN)
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -62,6 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         "https://bf45a1d0861cf7963d7797cd2532fd4c.dd.cdntips.com/imtt.dd.qq.com/16891/A648B2CCD07D1444DEB8A1F629B4F18F.apk?mkey=5cf0ba207151e2a8&f=0c2f&fsname=com.taobao.taobao_8.8.0_243.apk&csr=1bbd&cip=113.81.196.93&proto=https"
     )
 
+    private lateinit var mAdView : AdView
     private lateinit var notesBox: Box<Note>
     private lateinit var fab: FloatingActionButton
 
@@ -90,6 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
 
         setupViewPager()
+        initAD()
     }
 
     override fun onBackPressed() {
@@ -200,5 +198,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             notes.add(note)
         }
         notesBox.put(notes)
+    }
+
+    private fun initAD() {
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 }

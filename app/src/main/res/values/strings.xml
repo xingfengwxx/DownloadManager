@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">VideoDownloadManager</string>
+    <string name="admob_app_id">ca-app-pub-5505977675462440~3162717443</string>
+    <string name="admob_banner_main_id">ca-app-pub-5505977675462440/7070172860</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
